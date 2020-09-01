@@ -11,37 +11,41 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(Input.GetButtonDown(/*INSERT KEY NAME*/))
-        //{
-        //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
-        //}
         //if (Input.GetButtonDown(/*INSERT KEY NAME*/))
         //{
         //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
         //}
-        //if (Input.GetButtonDown(/*INSERT KEY NAME*/))
+        //if (Input.GetButtonDown(KeyCode.LeftArrow))
         //{
-        //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
+        //    transform.Rotate(0, 180, 0);
         //}
-        //if (Input.GetButtonDown(/*INSERT KEY NAME*/))
-        //{
-        //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
-        //}
+
         if (Input.GetButtonDown("Jump"))
         {
+            //Space Bar
             player.GetComponent<Animator>().Play("Die_SwordShield");
             gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
+        }        
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            //Right Arrow
+            Debug.Log("POSITIVE");
+            player.GetComponent<Animator>().Play("Run_SwordShield");
+
         }
-        //Jump();
+        else if (Input.GetAxis("Horizontal") < 0)
+        {
+            //Left Arrow
+            Debug.Log("NEGATIVE");
+            transform.Rotate(0, 180, 0);
+            player.GetComponent<Animator>().Play("Run_SwordShield");
+        }
+        else
+        {
+            //Idle, no input
+            player.GetComponent<Animator>().Play("Idle_SwordShield");
+        }
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
     }
-
-    //void Jump()
-    //{
-    //    if (Input.GetButtonDown("Jump"))
-    //    {
-    //        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
-    //    }
-    //}
 }
