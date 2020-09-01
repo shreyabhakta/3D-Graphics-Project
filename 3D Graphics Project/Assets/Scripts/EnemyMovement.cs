@@ -22,18 +22,16 @@ public class EnemyMovement : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log(other.transform.tag);
 		if (other.transform.tag == "turn")
 		{
 			if (movingRight == true)
 			{
 				movingRight = false;
-				Debug.Log("TURN!");
+				transform.Rotate(0, 180, 0);
 			}
 			else
 			{
 				movingRight = true;
-				Debug.Log("TURN AGAIN!");
 			}
 		}
 	}
