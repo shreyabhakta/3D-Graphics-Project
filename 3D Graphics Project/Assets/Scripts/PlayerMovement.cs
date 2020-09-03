@@ -16,18 +16,19 @@ public class PlayerMovement : MonoBehaviour
         //{
         //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
         //}
-        //if (Input.GetButtonDown(KeyCode.LeftArrow))
-        //{
-        //    transform.Rotate(0, 180, 0);
-        //}
-
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Fire1"))
+        {
+            player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");
+            Debug.Log("ATTACK");
+        }
+        else if (Input.GetButtonDown("Jump"))
         {
             //Space Bar
-            player.GetComponent<Animator>().Play("Die_SwordShield");
-            gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
+            Jump();
+            //player.GetComponent<Animator>().Play("Die_SwordShield");
+            //gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
         }        
-        if (Input.GetAxis("Horizontal") > 0)
+        else if (Input.GetButtonDown("Horizontal") > 0)
         {
             //Right Arrow
             Debug.Log("POSITIVE");
@@ -39,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             player.GetComponent<Animator>().Play("Run_SwordShield");
 
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (Input.GetButtonDown("Horizontal") < 0)
         {
             //Left Arrow
             Debug.Log("NEGATIVE");
@@ -57,5 +58,12 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
+    }
+    
+    void Jump()
+    {
+        //Space Bar
+        player.GetComponent<Animator>().Play("Die_SwordShield");
+        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
     }
 }
