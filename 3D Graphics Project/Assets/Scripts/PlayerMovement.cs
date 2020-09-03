@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
             //player.GetComponent<Animator>().Play("Die_SwordShield");
             //gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
         }        
-        else if (Input.GetButtonDown("Horizontal") > 0)
+        else if (Input.GetAxis("Horizontal") > 0)
         {
             //Right Arrow
             Debug.Log("POSITIVE");
@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
             player.GetComponent<Animator>().Play("Run_SwordShield");
 
         }
-        else if (Input.GetButtonDown("Horizontal") < 0)
+        else if (Input.GetAxis("Horizontal") < 0)
         {
             //Left Arrow
             Debug.Log("NEGATIVE");
