@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 7f;
     public float jumpSpeed = 7f;
+    public bool isLeftTurn = false;
     public GameObject player;
 
     // Update is called once per frame
@@ -30,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //Right Arrow
             Debug.Log("POSITIVE");
+            if (isLeftTurn)
+            {
+                transform.Rotate(0, 180, 0);
+                isLeftTurn = false;
+            }
             player.GetComponent<Animator>().Play("Run_SwordShield");
 
         }
@@ -37,7 +43,11 @@ public class PlayerMovement : MonoBehaviour
         {
             //Left Arrow
             Debug.Log("NEGATIVE");
-            transform.Rotate(0, 180, 0);
+            if (isLeftTurn == false)
+            {
+                transform.Rotate(0, 180, 0);
+                isLeftTurn = true;
+            }
             player.GetComponent<Animator>().Play("Run_SwordShield");
         }
         else
