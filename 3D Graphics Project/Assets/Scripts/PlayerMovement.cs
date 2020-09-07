@@ -12,22 +12,18 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButtonDown(/*INSERT KEY NAME*/))
-        //{
-        //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
-        //}
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown("1"))
         {
+            //FIXME: Play Animation while running
             player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");
             Debug.Log("ATTACK");
+         
         }
         else if (Input.GetButtonDown("Jump"))
         {
             //Space Bar
-            Jump();
-            //player.GetComponent<Animator>().Play("Die_SwordShield");
-            //gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
-        }        
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
+        }
         else if (Input.GetAxis("Horizontal") > 0)
         {
             //Right Arrow
@@ -51,19 +47,8 @@ public class PlayerMovement : MonoBehaviour
             }
             player.GetComponent<Animator>().Play("Run_SwordShield");
         }
-        else
-        {
-            //Idle, no input
-            player.GetComponent<Animator>().Play("Idle_SwordShield");
-        }
+
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
-    }
-    
-    void Jump()
-    {
-        //Space Bar
-        player.GetComponent<Animator>().Play("Die_SwordShield");
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
     }
 }
