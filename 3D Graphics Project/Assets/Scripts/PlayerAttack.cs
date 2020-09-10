@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-	private void OnTriggerEnter(Collider other)
-	{
-		if (other.transform.tag == "Enemy")
-		{
-			Destroy(other.gameObject);
+	void OnCollisionEnter(Collision other)
+    {
+		if (other.transform.tag == "Enemy") {
+			if(other.contacts[0].normal.y >= 0.9f) {
+				print("Points colliding: " + other.contacts.Length);
+				print("First point that collided: " + other.contacts[0].normal);
+				Destroy(other.gameObject);
+			}
 		}
-	}
+    }
 }
