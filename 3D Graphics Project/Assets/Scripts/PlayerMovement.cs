@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 7f;
     public bool isLeftTurn = false;
     public GameObject player;
+    public bool isGrounded = true;
 
     // Update is called once per frame
     void Update()
@@ -15,19 +16,17 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("1"))
         {
             //FIXME: Play Animation while running
-            player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");
-            Debug.Log("ATTACK");
-         
+            player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");         
         }
-        else if (Input.GetButtonDown("Jump"))
+        else if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Space Bar
             gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
+            isGrounded = false;        
         }
         else if (Input.GetAxis("Horizontal") > 0)
         {
             //Right Arrow
-            Debug.Log("POSITIVE");
             if (isLeftTurn)
             {
                 transform.Rotate(0, 180, 0);
@@ -39,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetAxis("Horizontal") < 0)
         {
             //Left Arrow
-            Debug.Log("NEGATIVE");
             if (isLeftTurn == false)
             {
                 transform.Rotate(0, 180, 0);
@@ -51,4 +49,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
     }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.transform.tag == "Ground")
+		{
+			isGrounded = true;
+		}
+	}
 }

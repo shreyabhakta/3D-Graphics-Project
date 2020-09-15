@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class Collisons : MonoBehaviour
 {
-	public class PlayerAttack : MonoBehaviour
+	public Transform spawnpoint;
+
+	private void OnTriggerEnter(Collider other)
 	{
-		private void OnTriggerEnter(Collider other)
+		if (other.transform.tag == "Water")
 		{
-			if (other.transform.tag == "Player")
-			{
-				Destroy(other.gameObject);
-			}
+			Respawn();
 		}
+	}
+	
+	void Respawn() {
+		this.transform.position = spawnpoint.position;
 	}
 }

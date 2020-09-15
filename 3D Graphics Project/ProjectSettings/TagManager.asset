@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - turn
+  - Coin
+  - Enemy
+  - Sword
+  - Water
+  - Ground
   layers:
   - Default
   - TransparentFX
