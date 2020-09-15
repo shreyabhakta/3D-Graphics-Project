@@ -8,30 +8,25 @@ public class PlayerMovement : MonoBehaviour
     public float jumpSpeed = 7f;
     public bool isLeftTurn = false;
     public GameObject player;
+    public bool isGrounded = true;
 
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetButtonDown(/*INSERT KEY NAME*/))
-        //{
-        //    player.GetComponent<Animator>().Play(/*INSERT ANIMATION NAME*/);
-        //}
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetKeyDown("1"))
         {
-            player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");
-            Debug.Log("ATTACK");
+            //FIXME: Play Animation while running
+            player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");         
         }
-        else if (Input.GetButtonDown("Jump"))
+        else if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Space Bar
-            Jump();
-            //player.GetComponent<Animator>().Play("Die_SwordShield");
-            //gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
-        }        
+            gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
+            isGrounded = false;        
+        }
         else if (Input.GetAxis("Horizontal") > 0)
         {
             //Right Arrow
-            Debug.Log("POSITIVE");
             if (isLeftTurn)
             {
                 transform.Rotate(0, 180, 0);
@@ -43,7 +38,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Input.GetAxis("Horizontal") < 0)
         {
             //Left Arrow
-            Debug.Log("NEGATIVE");
             if (isLeftTurn == false)
             {
                 transform.Rotate(0, 180, 0);
@@ -51,19 +45,16 @@ public class PlayerMovement : MonoBehaviour
             }
             player.GetComponent<Animator>().Play("Run_SwordShield");
         }
-        else
-        {
-            //Idle, no input
-            player.GetComponent<Animator>().Play("Idle_SwordShield");
-        }
+
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
         transform.position += movement * Time.deltaTime * moveSpeed;
     }
-    
-    void Jump()
-    {
-        //Space Bar
-        player.GetComponent<Animator>().Play("Die_SwordShield");
-        gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
-    }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.transform.tag == "Ground")
+		{
+			isGrounded = true;
+		}
+	}
 }
