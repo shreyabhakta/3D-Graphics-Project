@@ -12,9 +12,6 @@ public class PlayerAttack : MonoBehaviour
 			if(other.contacts[0].normal.y >= 0.9f) {
 				Destroy(other.gameObject);
 			}
-			else {
-				Respawn();
-			}
 		}
     }
 
