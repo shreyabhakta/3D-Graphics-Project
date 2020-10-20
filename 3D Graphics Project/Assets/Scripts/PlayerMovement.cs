@@ -14,13 +14,14 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("1"))
-        {
+        { 
             //FIXME: Play Animation while running
             player.GetComponent<Animator>().Play("NormalAttack01_SwordShield");         
         }
         else if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Space Bar
+            print("JUMP!");
             gameObject.GetComponent<Rigidbody>().AddForce(new Vector2(0f, jumpSpeed), ForceMode.Impulse);
             isGrounded = false;        
         }
@@ -52,8 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+        Debug.Log("other:" + other.transform.tag);
 		if (other.transform.tag == "Ground")
 		{
+            print("IS GROUNDED SHOULD BE TRUE!");
 			isGrounded = true;
 		}
 	}
