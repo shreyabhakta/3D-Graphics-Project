@@ -15,6 +15,4 @@ public class LevelSelection : MonoBehaviour {
 			}
 		}
     }
-
-
 }
