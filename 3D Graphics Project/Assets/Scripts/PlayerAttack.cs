@@ -21,7 +21,10 @@ public class PlayerAttack : MonoBehaviour
 			health = numOfHearts;
 		}
         for(int i = 0; i < hearts.Length; i++) {
-        	if(i < health) {
+        	if(health == 0) {
+				SceneManager.LoadScene(21);
+			}
+			else if(i < health) {
         		hearts[i].texture = fullHeart.texture;
         	}
 			else {
@@ -60,6 +63,7 @@ public class PlayerAttack : MonoBehaviour
 			if(SceneManager.GetActiveScene().buildIndex == 20) {
 				Debug.Log("YOU HAVE COMPLETED THE GAME");
 				//back to main menu
+
 				PlayerPrefs.SetInt("levelAt", nextSceneLoad);
 			}
 			else {

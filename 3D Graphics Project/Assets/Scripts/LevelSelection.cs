@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour {
+	public int sceneLoadIndex;
+
 	public Button[] levelButtons;
     // Start is called before the first frame update
     void Start() {
@@ -15,4 +18,8 @@ public class LevelSelection : MonoBehaviour {
 			}
 		}
     }
+
+	public void LoadScene() {
+		SceneManager.LoadScene(sceneLoadIndex);
+	}
 }
